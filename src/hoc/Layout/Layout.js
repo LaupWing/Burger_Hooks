@@ -1,47 +1,39 @@
-import React, {Component} from  'react'
+import React from  'react'
 import Aux from '../Auxiliry/Auxiliry'
 import classes from './Layout.module.css'
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar'
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer'
 import {connect} from 'react-redux'
 
-class Layout extends Component{
-    state = {
-        showSideDrawer: false
-    }
-
-    sideDrawerToggle = () =>{
-        this.setState((prevState)=>{
-            return {showSideDrawer: !prevState.showSideDrawer}
-        })
+const Layout = props =>{
+    const [sideDrawerIsVisible, setSideDrawerIsVisible] = React.useState(false)
+    const sideDrawerToggle = () =>{
+        setSideDrawerIsVisible(!sideDrawerIsVisible)
         // This belowe is a nono because setState is asynchronous
         // this.setState({
         //     showSideDrawer: !this.state.showSideDrawer
         // })
     }
-    sideDrawerOpen = ()=>{
-        this.setState({
-            showSideDrawer: true
-        })
+    const sideDrawerClosed = ()=>{
+        setSideDrawerIsVisible(false)
     }
-    render(){
-        return(
-            <Aux>
-                <Toolbar
-                    isAuth={this.props.isAuth} 
-                    drawerToggleClicked={this.sideDrawerOpen}
-                />
-                <SideDrawer 
-                    open={this.state.showSideDrawer} 
-                    closed={this.sideDrawerToggle}
-                    isAuth={this.props.isAuth}
-                />
-                <main className={classes.Content}>
-                    {this.props.children}
-                </main>
-            </Aux>
-        )
-    }
+    return(
+        <Aux>
+            <Toolbar
+                isAuth={props.isAuth} 
+                drawerToggleClicked={sideDrawerToggle}
+            />
+            <SideDrawer 
+                open={sideDrawerIsVisible} 
+                closed={sideDrawerClosed}
+                isAuth={props.isAuth}
+            />
+            <main className={classes.Content}>
+                {props.children}
+            </main>
+        </Aux>
+    )
+    
 }
     
 const mapStateToProps = state=>{
