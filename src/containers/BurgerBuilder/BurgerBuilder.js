@@ -12,10 +12,10 @@ import * as actions from '../../store/actions/index'
 
 export const BurgerBuilder = props =>{
     const [purchasing, setPurchasing] = React.useState(false)
-
+    const {onInitIngredients} = props
     React.useEffect(()=>{
-        props.onInitIngredients()
-    })
+        onInitIngredients()
+    }, [onInitIngredients])
     // Rewatch 166
     const updatePurchaseState = (ingredients)=>{
         // Basic converting object to array with object and key

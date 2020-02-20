@@ -19,7 +19,7 @@ export default httpClient => {
             httpClient.interceptors.request.eject(req)
             httpClient.interceptors.response.eject(res)
         }
-    }, [req, res])
+    }, [httpClient.interceptors.request, httpClient.interceptors.response, req, res])
 
     return [error, errorConfirmedHandler]
 }

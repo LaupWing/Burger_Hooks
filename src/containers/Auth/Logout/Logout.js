@@ -2,10 +2,11 @@ import React from 'react'
 import * as actions from '../../../store/actions/index'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-const Logout =()=>{
-    React.useEffect((props)=>{
-        props.onLogout()
-    })
+const Logout =(props)=>{
+    const {onLogout} = props 
+    React.useEffect(()=>{
+        onLogout()
+    },[onLogout])
     return (
         <Redirect to="/"/>
     )

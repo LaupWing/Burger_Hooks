@@ -40,11 +40,15 @@ const Auth =(props)=>{
     })
     const [isSignup, setIsSignup] = React.useState(true)
     
+    const {
+        building, 
+        authRedirectPath, 
+        onSetAuthRedirectPath} = props
     React.useEffect(()=>{
-        if(props.building && props.authRedirectPath !== '/'){
-            props.onSetAuthRedirectPath()
+        if(building && authRedirectPath !== '/'){
+            onSetAuthRedirectPath()
         }
-    })
+    },[building, authRedirectPath, onSetAuthRedirectPath])
 
 
     const checkValidity = (value, rules)=>{
